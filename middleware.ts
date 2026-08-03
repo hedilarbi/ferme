@@ -22,7 +22,14 @@ export function middleware(request: NextRequest) {
   // server components. All tenant-aware code should read this value instead of
   // parsing Host headers directly in pages.
   const hostHeader = request.headers.get("host") ?? request.nextUrl.hostname;
-  const hostname = normalizeHostname(hostHeader.split(":")[0] ?? "");
+  const forwardedHost = request.headers.get("x-forwarded-host");
+  console.log("[MIDDLEWARE] Incoming request for:", request.url);
+  console.log("[MIDDLEWARE] hostHeader:", hostHeader, "forwardedHost:", forwardedHost);
+
+  const rawHost = forwardedHost || hostHeader;
+  const hostname = normalizeHostname(rawHost.split(":")[0] ?? "");
+  console.log("[MIDDLEWARE] Normalized hostname:", hostname);
+  
   requestHeaders.set("x-tenant-hostname", hostname);
 
   return NextResponse.next({
