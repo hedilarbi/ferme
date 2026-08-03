@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
 
   // Produce a standalone build for Docker — copies only what's needed to run.
   // See: https://nextjs.org/docs/app/api-reference/config/next-config-js/output
-  output: "standalone",
+  // output: "standalone", // Disabled because we use pm2 next start
 
   // Multi-server deployments: version-skew protection
   ...(process.env.DEPLOYMENT_VERSION && {
