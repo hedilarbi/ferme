@@ -4,7 +4,7 @@ export type PromptContext = {
   site: Site & { geoSettings: GeoSettings | null; themeSettings: { designKey: string } | null };
   campaign: Campaign;
   anchorStrategy: string;
-  role: "LEURRE" | "DOUX" | "SNIPER" | "COMPARATOR" | "VERSUS" | "LISTICLE" | "TRENDS" | "CASE_STUDY" | "HOW_TO" | "ULTIMATE_GUIDE" | "FAQ" | "MYTHS" | "INTERVIEW";
+  role: "LEURRE" | "DOUX" | "SNIPER" | "COMPARATOR" | "VERSUS" | "LISTICLE" | "TRENDS" | "CASE_STUDY" | "HOW_TO" | "ULTIMATE_GUIDE" | "FAQ" | "MYTHS" | "INTERVIEW" | "OP_ED";
 };
 
 export function buildPrompt({ site, campaign, anchorStrategy, role }: PromptContext): string {
