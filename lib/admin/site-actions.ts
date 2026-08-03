@@ -63,6 +63,7 @@ export async function updateSite(id: string, formData: FormData) {
   const name = formData.get("name") as string;
   const brandName = formData.get("brandName") as string;
   const slug = formData.get("slug") as string;
+  const hostname = formData.get("hostname") as string;
   const description = formData.get("description") as string;
   const designKey = formData.get("designKey") as string;
   const primaryColor = formData.get("primaryColor") as string;
@@ -95,6 +96,26 @@ export async function updateSite(id: string, formData: FormData) {
       },
     },
   });
+
+  if (hostname) {
+    const normalizedHostname = normalizeHostname(hostname);
+    // Find the primary domain and update it
+    const primaryDomain = await prisma.domain.findFirst({
+      where: { siteId: id, isPrimary: true },
+    });
+    
+    if (primaryDomain) {
+      await prisma.domain.update({
+        where: { id: primaryDomain.id },
+        data: { hostname: normalizedHostname },
+      });
+    } else {
+      // Create one if it doesn't exist
+      await prisma.domain.create({
+        data: { siteId: id, hostname: normalizedHostname, isPrimary: true },
+      });
+    }
+  }
 
   revalidatePath("/admin/sites");
   revalidatePath("/(site)", "layout");

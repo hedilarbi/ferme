@@ -89,14 +89,16 @@ export default async function EditSitePage({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">Primary Hostname (Read Only)</label>
+              <label htmlFor="hostname" className="text-sm font-bold text-slate-700">Primary Hostname</label>
               <input 
                 type="text" 
-                disabled
-                value={site.domains[0]?.hostname || ""}
-                className="w-full px-4 py-3 bg-slate-100 border border-slate-200 rounded-xl text-slate-400 font-mono text-sm cursor-not-allowed"
+                name="hostname"
+                id="hostname"
+                required
+                defaultValue={site.domains[0]?.hostname || ""}
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm transition-all outline-none"
               />
-              <p className="text-[10px] text-slate-400 italic">Le hostname ne peut pas être modifié après création.</p>
+              <p className="text-[10px] text-slate-400 italic">Modifiez ce domaine avec précaution, cela impacte les URLs publiques.</p>
             </div>
           </div>
 
