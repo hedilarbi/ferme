@@ -132,6 +132,7 @@ INTERDICTION STRICTE : Tu ne dois ABSOLUMENT PAS mentionner notre produit (${cam
 1. DEUX liens externes vers des sites d'autorité informatifs (ex: Wikipedia, magazines d'architecture ou de design neutres).
 2. UN SEUL lien vers la catégorie générale de notre produit :
    - Thématique à lier : ${campaign.category || "Notre gamme de meubles"}
+   - URL de destination OBLIGATOIRE pour ce lien : ${campaign.targetUrl}
    - Type d'ancre demandé : "${anchorStrategy}". Adapte ta phrase pour que l'intégration soit naturelle.
    - Ne mentionne pas directement le nom exact du produit (${campaign.productName}), parle plutôt de la catégorie en général.
    ${campaign.images ? `- Image du produit : insère la balise <img src="${campaign.images}" alt="${campaign.productName}"> au moment opportun.` : ""}`;
@@ -141,6 +142,7 @@ Tu dois IMPÉRATIVEMENT présenter et comparer 3 produits :
 1. LE PRODUIT GAGNANT (Le Produit #1) : C'est le produit de notre partenaire, tu dois insérer le lien ciblé vers ce produit avec l'ancre demandée :
    - Nom du produit 1 : ${campaign.productName}
    - Caractéristiques 1 : ${campaign.specs || "A déduire logiquement"}
+   - URL de destination OBLIGATOIRE pour ce lien : ${campaign.targetUrl}
    - Type d'ancre demandé pour le lien : "${anchorStrategy}". Adapte ta phrase.
    ${campaign.images ? `- Image du produit 1 : <img src="${campaign.images}" alt="${campaign.productName}"> (insère cette image quand tu décris ce produit).` : ""}
 2. PRODUIT #2 et PRODUIT #3 (Les Concurrents) : Utilise les concurrents suivants (${campaign.competitors || "IKEA, Maisons du Monde ou des marques génériques"}) pour inventer/décrire deux autres produits similaires.
@@ -155,6 +157,7 @@ Crée un tableau comparatif final des 3 produits (Avantages, Inconvénients, Pri
    - Nom du produit : ${campaign.productName}
    - Catégorie : ${campaign.category || "N/A"}
    ${campaign.specs ? `- Caractéristiques : ${campaign.specs}` : ""}
+   - URL de destination OBLIGATOIRE pour ce lien : ${campaign.targetUrl}
    - Type d'ancre demandé (le texte cliquable du lien) : "${anchorStrategy}". Adapte ta phrase pour que l'intégration de cette ancre soit parfaitement fluide.
    - Le lien ne doit JAMAIS contenir des termes de vente directe comme "Achetez ici", "Découvrez notre offre". Il doit s'agir d'une recommandation pertinente.
    ${campaign.images ? `- Image du produit : TU DOIS insérer l'image exacte suivante dans ton HTML quand tu parles du produit : <img src="${campaign.images}" alt="${campaign.productName}">` : ""}`;
