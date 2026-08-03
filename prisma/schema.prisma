@@ -143,6 +143,7 @@ model Campaign {
   competitors       String?
   externalSources   String?
   images            String?
+  targetUrl         String?
   targetCities      String?
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt

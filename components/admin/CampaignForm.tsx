@@ -52,9 +52,11 @@ export function CampaignForm() {
           <label htmlFor="productUrl" className="text-sm font-bold text-blue-900">Product URL (Auto-Scraping)</label>
           <input 
             type="url" 
+            name="targetUrl"
             id="productUrl" 
             value={productUrl}
             onChange={(e) => setProductUrl(e.target.value)}
+            required
             placeholder="https://example.com/product"
             className="w-full px-4 py-3 bg-white border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 transition-all outline-none"
           />

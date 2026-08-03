@@ -15,6 +15,7 @@ export async function createCampaign(formData: FormData) {
   const externalSources = formData.get("externalSources") as string;
   const strategy = formData.get("strategy") as string;
   const images = formData.get("images") as string;
+  const targetUrl = formData.get("targetUrl") as string;
 
   if (!name || !productName || !description) {
     throw new Error("Missing required fields");
@@ -32,6 +33,7 @@ export async function createCampaign(formData: FormData) {
       externalSources,
       strategy,
       images,
+      targetUrl,
       status: "DRAFT",
     },
   });
@@ -51,6 +53,7 @@ export async function updateCampaign(id: string, formData: FormData) {
   const externalSources = formData.get("externalSources") as string;
   const strategy = formData.get("strategy") as string;
   const images = formData.get("images") as string;
+  const targetUrl = formData.get("targetUrl") as string;
 
   if (!name || !productName || !description) {
     throw new Error("Missing required fields");
@@ -69,6 +72,7 @@ export async function updateCampaign(id: string, formData: FormData) {
       externalSources,
       strategy,
       images,
+      targetUrl,
     },
   });
 
