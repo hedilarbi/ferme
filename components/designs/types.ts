@@ -4,6 +4,7 @@ export type ArticleSummary = {
   slug: string;
   title: string;
   excerpt?: string | null;
+  featuredImage?: string | null;
   publishedAt?: Date | null;
   author?: { name: string } | null;
   categories?: Array<{ slug: string; name: string }>;
