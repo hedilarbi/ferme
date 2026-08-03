@@ -56,7 +56,7 @@ function MagazineArticleCard({
       
       <div className={`flex flex-col justify-between ${hero ? "p-8 md:p-16" : "p-6 lg:p-8"}`}>
         <div>
-          <h2 className={`font-black uppercase leading-[0.85] tracking-tighter transition-colors group-hover:text-[#E60000] ${hero ? "text-6xl md:text-[5rem] lg:text-[7rem]" : "text-4xl lg:text-5xl"}`}>
+          <h2 className={`font-black uppercase leading-[0.85] tracking-tighter transition-colors group-hover:text-[#E60000] ${hero ? "text-5xl md:text-6xl lg:text-7xl" : "text-3xl lg:text-4xl"}`}>
             {article.title}
           </h2>
           {article.excerpt && (
@@ -85,7 +85,7 @@ const Header = ({ site }: LayoutComponentProps) => (
   <header className="sticky top-0 z-50 border-b-4 border-black bg-white">
     <div className="flex items-center justify-between px-6 py-4">
       <Link href="/" className="group relative">
-        <h1 className="text-5xl font-black uppercase leading-none tracking-tighter transition-transform group-hover:scale-[1.02] md:text-7xl">
+        <h1 className="text-4xl font-black uppercase leading-none tracking-tighter transition-transform group-hover:scale-[1.02] md:text-5xl">
           {site.brandName}
         </h1>
         <div className="absolute -bottom-2 left-0 h-2 w-0 bg-[#E60000] transition-all duration-300 group-hover:w-full"></div>
@@ -114,7 +114,7 @@ const Footer = ({ site }: LayoutComponentProps) => (
     <MagazineMarquee text="L'ÉDITION NUMÉRIQUE" />
     <div className="grid grid-cols-1 border-b-4 border-white lg:grid-cols-2">
       <div className="border-b-4 border-white p-12 lg:border-b-0 lg:border-r-4">
-        <h2 className="text-[10vw] font-black uppercase leading-[0.8] tracking-tighter lg:text-[6vw]">
+        <h2 className="text-6xl font-black uppercase leading-[0.8] tracking-tighter lg:text-7xl">
           {site.brandName}
         </h2>
         <p className="mt-8 max-w-xl text-2xl font-medium italic text-zinc-400">
@@ -186,7 +186,7 @@ const ArticlePage = ({ site, article }: ArticlePageProps) => (
             </span>
           ))}
         </div>
-        <h1 className="text-[12vw] font-black uppercase leading-[0.8] tracking-tighter lg:text-[8rem]">
+        <h1 className="text-5xl font-black uppercase leading-[0.9] tracking-tighter md:text-6xl lg:text-7xl">
           {article.title}
         </h1>
         {article.excerpt && (
@@ -238,7 +238,7 @@ const ArticlePage = ({ site, article }: ArticlePageProps) => (
 const ArticlesPage = ({ site, articles, page, totalPages }: ArticlesPageProps) => (
   <div className="bg-zinc-100">
     <div className="border-b-4 border-black bg-white py-20 text-center">
-      <h1 className="text-[15vw] font-black uppercase leading-[0.8] tracking-tighter lg:text-[12rem]">
+      <h1 className="text-5xl font-black uppercase leading-[0.9] tracking-tighter md:text-6xl lg:text-7xl">
         Archives
       </h1>
     </div>
@@ -256,8 +256,8 @@ const ArticlesPage = ({ site, articles, page, totalPages }: ArticlesPageProps) =
 const CategoryPage = ({ site, category }: CategoryPageProps) => (
   <div className="bg-zinc-100">
     <div className="border-b-4 border-black bg-[#E60000] py-20 text-center text-white">
-      <span className="bg-black px-6 py-2 text-3xl font-black uppercase tracking-widest">Section</span>
-      <h1 className="mt-8 text-[15vw] font-black uppercase leading-[0.8] tracking-tighter lg:text-[12rem]">
+      <span className="bg-black px-6 py-2 text-xl font-black uppercase tracking-widest text-white">Section</span>
+      <h1 className="mt-8 text-5xl font-black uppercase leading-[0.9] tracking-tighter md:text-6xl lg:text-7xl">
         {category.name}
       </h1>
       {category.description && (
