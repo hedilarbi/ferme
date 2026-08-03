@@ -55,7 +55,7 @@ export function CampaignForm() {
             id="productUrl" 
             value={productUrl}
             onChange={(e) => setProductUrl(e.target.value)}
-            placeholder="https://www.baita-home.com/..."
+            placeholder="https://example.com/product"
             className="w-full px-4 py-3 bg-white border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 transition-all outline-none"
           />
         </div>
