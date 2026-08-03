@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Tenant theme defaults — overridden per-tenant via inline <style> in layout */
+  --color-primary: #3b82f6;
+  --color-secondary: #64748b;
+  --font-body: system-ui, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ─── Base styles ────────────────────────────────────────────────────────── */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+}
+
+/* Smooth focus rings */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Prose / article content typography */
+.prose {
+  max-width: 65ch;
+  line-height: 1.75;
+}
+
+.prose h2,
+.prose h3 {
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose p {
+  margin-bottom: 1.25em;
+}
+
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25em;
+}
+
+.prose a {
+  color: var(--color-primary);
+  text-decoration: underline;
 }

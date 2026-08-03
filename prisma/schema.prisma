@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Site {
+  id              String           @id @default(cuid())
+  name            String
+  slug            String           @unique
+  status          String           @default("ACTIVE")
+  defaultLocale   String           @default("fr")
+  brandName       String
+  description     String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  articles        Article[]
+  authors         Author[]
+  categories      Category[]
+  domains         Domain[]
+  geoSettings     GeoSettings?
+  navigationItems NavigationItem[]
+  seoSettings     SeoSettings?
+  themeSettings   ThemeSettings?
+}
+
+model Domain {
+  id        String   @id @default(cuid())
+  hostname  String   @unique
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  siteId    String
+  site      Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+}
+
+model Article {
+  id              String           @id @default(cuid())
+  slug            String
+  title           String
+  excerpt         String?
+  content         String
+  status          String           @default("DRAFT")
+  publishedAt     DateTime?
+  seoTitle        String?
+  seoDescription  String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  siteId          String
+  authorId        String?
+  featuredImage   String?
+  author          Author?          @relation(fields: [authorId], references: [id])
+  site            Site             @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  campaignArticle CampaignArticle?
+  categories      Category[]       @relation("ArticleCategories")
+
+  @@unique([siteId, slug])
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  slug        String
+  name        String
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  siteId      String
+  site        Site      @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  articles    Article[] @relation("ArticleCategories")
+
+  @@unique([siteId, slug])
+}
+
+model Author {
+  id        String    @id @default(cuid())
+  name      String
+  bio       String?
+  avatar    String?
+  createdAt DateTime  @default(now())
+  siteId    String
+  articles  Article[]
+  site      Site      @relation(fields: [siteId], references: [id], onDelete: Cascade)
+}
+
+model NavigationItem {
+  id       String           @id @default(cuid())
+  label    String
+  href     String
+  order    Int              @default(0)
+  siteId   String
+  parentId String?
+  parent   NavigationItem?  @relation("NavigationChildren", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children NavigationItem[] @relation("NavigationChildren")
+  site     Site             @relation(fields: [siteId], references: [id], onDelete: Cascade)
+}
+
+model ThemeSettings {
+  id             String  @id @default(cuid())
+  logo           String?
+  primaryColor   String  @default("#3b82f6")
+  secondaryColor String  @default("#64748b")
+  fontFamily     String  @default("system-ui, sans-serif")
+  designKey      String  @default("default")
+  siteId         String  @unique
+  site           Site    @relation(fields: [siteId], references: [id], onDelete: Cascade)
+}
+
+model SeoSettings {
+  id              String  @id @default(cuid())
+  titleTemplate   String  @default("%s | %site")
+  metaDescription String?
+  defaultOgImage  String?
+  robots          String  @default("index,follow")
+  siteId          String  @unique
+  site            Site    @relation(fields: [siteId], references: [id], onDelete: Cascade)
+}
+
+model GeoSettings {
+  id           String  @id @default(cuid())
+  city         String?
+  region       String?
+  country      String  @default("France")
+  persona      String  @default("expert")
+  audienceDesc String?
+  writingTone  String  @default("informatif")
+  locale       String  @default("fr")
+  siteId       String  @unique
+  site         Site    @relation(fields: [siteId], references: [id], onDelete: Cascade)
+}
+
+model Campaign {
+  id                String            @id @default(cuid())
+  name              String
+  status            String            @default("DRAFT")
+  strategy          String            @default("100_SNIPER")
+  productName       String
+  category          String?
+  description       String
+  specs             String?
+  keywords          String?
+  competitors       String?
+  externalSources   String?
+  images            String?
+  targetCities      String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  generatedArticles CampaignArticle[]
+}
+
+model CampaignArticle {
+  id         String   @id @default(cuid())
+  status     String   @default("PENDING")
+  promptUsed String?
+  campaignId String
+  siteId     String
+  articleId  String?  @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  article    Article? @relation(fields: [articleId], references: [id])
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@unique([campaignId, siteId])
+}
